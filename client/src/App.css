@@ -1,0 +1,144 @@
+.App {
+  text-align: center;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+
+}
+.contacts{
+  display: flex;
+  flex-direction: column-reverse
+}
+
+.circle-img{
+  width: 200px;
+ height: 200px;
+align-content: center;
+ border-radius: 100px;
+ -webkit-border-radius: 100px;
+ -moz-border-radius: 100px;
+}
+#container {
+  max-width: 300px;
+  /* Center the container in middle on horizontal axis */
+  margin: 0 auto;
+  /* Add empty space above the container (20% of the view height) */
+  margin-top: 5vh;
+  width: 50%;
+}
+
+.card {
+  /* Change background color */
+  background-color: white;
+
+  /* Add border */
+  border: 1px solid #bacdd8;
+
+  /* Add space between the border and the content */
+  padding: 8px;
+
+  border-radius: 12px;
+}
+
+.edit {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  margin-bottom: 15px !important;
+  font-weight: 600;
+  color: #0077ff;
+  background-color: #e0efff;
+  /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+  margin: 0 auto;
+  display: block;
+
+  /* Button is a clickable element, therefore it should have a pointer cursor */
+  cursor: pointer;
+}
+
+.edit:focus,
+.edit:hover {
+  background-color: #0077ff;
+  color: #e0efff;
+}
+
+.delete{
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fe0526;
+    background-color: #e0efff;
+    /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+    margin: 0 auto;
+    display: block;
+    /* Button is a clickable element, therefore it should have a pointer cursor */
+    cursor: pointer;
+  }
+  
+  .delete:focus,
+  .delete:hover {
+    background-color: #fe0526;
+    color: #e0efff;
+  }
+
+  .submit{
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fe7105;
+    background-color: #e0efff;
+    /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+    margin: 0 auto;
+    display: block;
+    /* Button is a clickable element, therefore it should have a pointer cursor */
+    cursor: pointer;
+  }
+  
+  .submit:focus,
+  .submit:hover {
+    background-color: #fe7105;
+    color: #e0efff;
+  }
+
+  form{
+    padding: 25px;
+    align-self: center;
+    border-radius: 50px;
+  }
+
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+  label{
+    padding:5px;
+    border:0;
+    margin:5px 0;
+  }
+
+  input[type=text] {
+    padding:10px;
+    border:0;
+    margin:10px 0;
+    border-radius:10px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  }
+
+  input[type=email] {
+    padding:10px;
+    border:0;
+    margin:10px 0;
+    border-radius:10px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  }
+
+  input, label, textarea {
+    font-family:inherit;
+    font-size: inherit;
+  }
+
+  fieldset{
+    border: none !important;
+  }
