@@ -5,6 +5,12 @@ import placeholderImg from '../assets/placeholder_user.png';
 
 const Contact = (props) =>{
 
+
+    const onDelete = () =>{
+        console.log("Inside contact");
+        props.onDelete(props.contact);
+    }
+
     return(
         <div id="container">
         <div className="card">
@@ -17,7 +23,7 @@ const Contact = (props) =>{
     <p className="info">{props.contact.phoneNumber}</p>
       </div>
       <button className="edit">Edit</button>
-      <button className="delete">Delete</button>
+      <button className="delete" onClick={onDelete}>Delete</button>
     </div>
     </div>
     )

@@ -10,39 +10,44 @@ const Form = (props) => {
   //create functions that handle the event of the user typing into the form
   const handleNameChange = (event) => {
     const newContactName = event.target.value;
-    setContact((contact) => ({ ...contact, newContactName }));
+    setContact((contact) => ({ ...contact, name: newContactName }));
   };
 
   const handleEmailChange = (event) => {
     const newcontactEmail = event.target.value;
-    setContact((contact) => ({ ...contact, newcontactEmail }));
+    setContact((contact) => ({ ...contact, email: newcontactEmail }));
   };
 
   const handlePhoneChange = (event) => {
     const newcontactPhone = event.target.value;
-    setContact((contact) => ({ ...contact, newcontactPhone }));
+    setContact((contact) => ({ ...contact, phoneNumber: newcontactPhone }));
   };
 
   //A function to handle the post request
-  // const postStudent = (newStudent) => {
-  //   return fetch("http://localhost:5000/api/students", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(newStudent),
-  //   })
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log("From the post ", data);
-  //       props.addStudent(data);
-  //     });
-  // };
+  const postContact = (newContact) => {
+    return fetch("http://localhost:8080/api/contacts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newContact),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("From the post ", data); // this is all the contacts
+        props.setContacts(data);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //postStudent(student);
+    postContact(contact);
     console.log(contact);
+    setContact({
+      name: "",
+      email: "",
+      phoneNumber: ""
+    })
   };
 
   return (
@@ -51,7 +56,6 @@ const Form = (props) => {
         <label>Name:</label>
         <input
           type="text"
-          id="add-contact-name"
           placeholder="Contact Name"
           required
           value={contact.name}
@@ -60,7 +64,6 @@ const Form = (props) => {
         <label>Email:</label>
         <input
           type="email"
-          id="add-contact-email"
           placeholder="Contact Email"
           required
           value={contact.email}
@@ -68,8 +71,7 @@ const Form = (props) => {
         />
         <label>Phone:</label>
         <input
-          type="text"
-          id="add-contact-phone"
+          type="tel"
           placeholder="Contact Phone"
           value={contact.phoneNumber}
           onChange={handlePhoneChange}

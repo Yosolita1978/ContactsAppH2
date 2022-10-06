@@ -9,6 +9,15 @@ const PORT = 8080;
 app.use(cors());
 app.use(express.json());
 
+const CONTACTS = [
+
+  { id: 1, name: 'Lisa Lee', email: 'lisalee@gmail.com', phoneNumber: "" },
+  { id: 2, name: 'Eileen Long', email: 'elong@gmail.com', phoneNumber: "" },
+  { id: 3, name: 'Andrea Rivera', email: 'andrearivera@gmail.com', phoneNumber: "" },
+  { id: 4, name: 'Cristina Rodriguez', email: 'crodriguez@gmail.com', phoneNumber: ""},
+  { id: 5, name: 'Paola Molina', email: 'pmolina@gmail.com', phoneNumber: "" },
+];
+
 // creates an endpoint for the route /api
 app.get('/', (req, res) => {
   res.json({ message: 'Hello from My template ExpressJS' });
@@ -16,37 +25,36 @@ app.get('/', (req, res) => {
 
 // create the get request
 app.get('/api/contacts', cors(), async (req, res) => {
-  const CONTACTS = [
-
-      { id: 1, name: 'Lisa Lee', email: 'lisalee@gmail.com', phoneNumber: "" },
-      { id: 2, name: 'Eileen Long', email: 'elong@gmail.com', phoneNumber: "" },
-      { id: 3, name: 'Andrea Rivera', email: 'andrearivera@gmail.com', phoneNumber: "" },
-      { id: 4, name: 'Cristina Rodriguez', email: 'crodriguez@gmail.com', phoneNumber: ""},
-      { id: 5, name: 'Paola Molina', email: 'pmolina@gmail.com', phoneNumber: "" },
-  ];
   res.json(CONTACTS);
-  // try {
-  //   const { rows: students } = await db.query('SELECT * FROM students');
-  //   res.send(students);
-  // } catch (e) {
-  //   return res.status(400).json({ e });
-  // }
 });
 
 // create the POST request
-// app.post('/api/students', cors(), async (req, res) => {
-//   const newUser = {
-//     firstname: req.body.firstname,
-//     lastname: req.body.lastname,
-//   };
-//   console.log([newUser.firstname, newUser.lastname]);
-//   const result = await db.query(
-//     'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
-//     [newUser.firstname, newUser.lastname],
-//   );
-//   console.log(result.rows[0]);
-//   res.json(result.rows[0]);
-// });
+app.post('/api/contacts', cors(), async (req, res) => {
+  const newId = CONTACTS.length + 1;
+  const newContact = {
+    id: newId,
+    name: req.body.name,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber
+  };
+  CONTACTS.push(newContact);
+  console.log(CONTACTS);
+  res.json(CONTACTS);
+});
+
+// Delete request - Hardcode data
+app.delete('/api/contacts/:contactId', cors(), async (req, res) =>{
+  const contactId = req.params.contactId;
+  for(let contact of CONTACTS){
+    if(contact.id == contactId){
+      let index = CONTACTS.indexOf(contact);
+      console.log(index);
+      CONTACTS.splice(index, 1);
+    }
+  }
+  console.log(CONTACTS);
+  res.status(200).end();
+});
 
 // console.log that your server is up and running
 app.listen(PORT, () => {

@@ -5,24 +5,37 @@ import Contact  from "./contact";
 function Contacts() {
   const [contacts, setContacts] = useState([]);
 
-  useEffect(() => {
+  const loadContacts = () => {
     fetch("http://localhost:8080/api/contacts")
       .then((response) => response.json())
       .then((contacts) => {
             setContacts(contacts);
           });
+  }
+
+  useEffect(() =>{
+    loadContacts();
   }, []);
 
-  const addContact = (newContact) => {
-    setContacts((contacts) => [...contacts, newContact]);
-  };
+  const deleteContact = (contact) =>{
+    return fetch(`http://localhost:8080/api/contacts/${contact.id}`, {
+        method: "DELETE"
+    }).then((response) =>{
+        console.log(response);
+        if(response.ok){
+            loadContacts();
+        }
+    })
+  }
+
+
 
   return (
     <div className="contacts">
         {contacts.map((contact) => (
-     <Contact contact={contact} key={contact.id}/>
+     <Contact onDelete={deleteContact} contact={contact} key={contact.id}/>
         ))}
-      <Form addContact={addContact} />
+      <Form setContacts={(contacts) => {setContacts(contacts)}} />
     </div>
   );
 }
