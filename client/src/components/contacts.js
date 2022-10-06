@@ -6,7 +6,7 @@ import EditForm from "./editform";
 function Contacts() {
   const [contacts, setContacts] = useState([]);
 
-  // New state to check if we are working on editing a student 
+  // New state to check if we are working on editing a contact
   const [editedContact, setEditedContact] = useState(null);
 
   //A function to do the get request and set the state contacts

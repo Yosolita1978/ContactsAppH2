@@ -5,7 +5,7 @@ import placeholderImg from '../assets/placeholder_user.png';
 const Contact = (props) =>{
 
     const onEdit = () =>{
-        console.log("inside the edit", props)
+        //console.log("inside the edit", props)
         props.onEdit(props.contact);
     }
     
