@@ -23,25 +23,10 @@ const Form = (props) => {
     setContact((contact) => ({ ...contact, phoneNumber: newcontactPhone }));
   };
 
-  //A function to handle the post request
-  const postContact = (newContact) => {
-    return fetch("http://localhost:8080/api/contacts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newContact),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log("From the post ", data); // this is all the contacts
-        props.setContacts(data);
-      });
-  };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    postContact(contact);
+    props.saveContact(contact);
     console.log(contact);
     setContact({
       name: "",

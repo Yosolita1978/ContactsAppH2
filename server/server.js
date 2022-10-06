@@ -38,8 +38,26 @@ app.post('/api/contacts', cors(), async (req, res) => {
     phoneNumber: req.body.phoneNumber
   };
   CONTACTS.push(newContact);
-  console.log(CONTACTS);
+  //console.log(CONTACTS);
   res.json(CONTACTS);
+});
+
+
+// Put request - Update request - hardcore data 
+app.put('/api/contacts/:contactId', cors(), async (req, res) =>{
+  const contactId = req.params.contactId;
+  const updateContact = { id: req.body.id, name: req.body.name, email: req.body.email, phoneNumber: req.body.phoneNumber }
+  //console.log(req.params);
+  // UPDATE students SET lastname = 'TestMarch' WHERE id = 1;
+  console.log(contactId);
+  console.log(updateContact);
+  for(let contact of CONTACTS){
+    if(contact.id == contactId){
+      let index = CONTACTS.indexOf(contact)
+      CONTACTS[index] = updateContact
+    }
+  }
+  res.send(CONTACTS);
 });
 
 // Delete request - Hardcode data
@@ -48,11 +66,11 @@ app.delete('/api/contacts/:contactId', cors(), async (req, res) =>{
   for(let contact of CONTACTS){
     if(contact.id == contactId){
       let index = CONTACTS.indexOf(contact);
-      console.log(index);
+      //console.log(index);
       CONTACTS.splice(index, 1);
     }
   }
-  console.log(CONTACTS);
+  //console.log(CONTACTS);
   res.status(200).end();
 });
 
